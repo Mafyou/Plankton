@@ -49,7 +49,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Plankton.CryptoHelper\Plankton.CryptoHelper.csproj" />
+	  <ProjectReference Include="..\Plankton.DTO\Plankton.DTO.csproj" />
+	  <ProjectReference Include="..\Plankton.RaceHelper\Plankton.RaceHelper.csproj" />
 	</ItemGroup>
 
 </Project>
