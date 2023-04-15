@@ -16,9 +16,9 @@ public partial class MainVM : ObservableObject
     {
         var result = await TaskGoup.RunScopeAsync(default, async group =>
         {
-            return await TaskGoup.RaceScopeAsync<FeedDTO>(group.CancellationToken, async group =>
+            return await TaskGoup.RaceScopeAsync<FeedDTO>(group.CancellationToken, group =>
             {
-                Parallel.For(1, 5000, (index) =>
+                Parallel.For(1, 500, (index) =>
                 {
                     group.Race(async token => await _api.EncryptedFeedRace(new FeedDTO { Kind = "Little", Count = index.ToString() }));
                     group.Race(async token => await _api.EncryptedFeedRace(new FeedDTO { Kind = "Big", Count = index.ToString() }));
