@@ -1,70 +1,70 @@
-# ?? Plankton Game
+﻿# 🐋 Plankton Game
 *A whale met a plankton. Imagine the REST.*
 
-## ?? Overview
+## 📖 Overview
 
 Plankton is a unique racing game built with .NET 9 that demonstrates advanced asynchronous programming concepts through a whale feeding simulation. The whale competes to consume different types of plankton in encrypted races, showcasing real-world scenarios of concurrent API calls, cryptographic operations, and race conditions.
 
-## ??? Architecture
+## 🏗️ Architecture
 
 The project follows a clean, modular architecture with multiple specialized libraries:
 
-### ?? **Whale.Maui** - Cross-Platform Client
+### 📱 **Whale.Maui** - Cross-Platform Client
 - **.NET MAUI** application targeting iOS, Android, macOS Catalyst, and Windows
 - **MVVM pattern** with CommunityToolkit.Mvvm
 - Real-time racing interface with dynamic results display
 - Cross-platform UI with accessibility support
 
-### ?? **Plankton.API** - Backend Service
+### 🌐 **Plankton.API** - Backend Service
 - **ASP.NET Core** minimal API
 - Hosted on Azure (planktonapi.azurewebsites.net)
 - Encrypted communication endpoint
 - Input validation and error handling
 
-### ?? **Plankton.CryptoHelper** - Security Layer
+### 🔐 **Plankton.CryptoHelper** - Security Layer
 - **AES encryption/decryption** utilities
 - Secure data transmission between client and server
 - Base64 encoding for safe transport
 
-### ?? **Plankton.RaceHelper** - Concurrent Racing Engine
+### 🏁 **Plankton.RaceHelper** - Concurrent Racing Engine
 - Advanced **task racing** and coordination
 - Exception handling and resource management
 - Dynamic task scheduling and result aggregation
 
-### ?? **Plankton.DTO** - Data Transfer Objects
+### 📦 **Plankton.DTO** - Data Transfer Objects
 - Shared contracts between client and server
 - Encrypted and decrypted data models
 - Type-safe communication
 
-## ? Features
+## ✨ Features
 
-### ?? **Racing Mechanics**
+### 🎮 **Racing Mechanics**
 - **Concurrent races** between different plankton types (Little, Big, Average)
 - **Real-time competition** using advanced task coordination
 - **Encrypted communication** for secure data transmission
 - **Dynamic race results** with position tracking
 
-### ?? **Security**
+### 🔒 **Security**
 - **AES-256 encryption** for all client-server communication
 - **Secure key management** (shared key: `E546C8DF278CD5931069B522E695D4F2`)
 - **Input validation** and sanitization
 - **Error handling** for tampered data
 
-### ?? **User Experience**
+### 📊 **User Experience**
 - **Configurable race size** (number of feeds)
 - **Live race status** updates
 - **Results leaderboard** with rankings
 - **Accessibility support** with semantic descriptions
 - **Cross-platform consistency**
 
-## ?? Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - **.NET 9 SDK** or later
 - **Visual Studio 2022** (17.8+) or **Visual Studio Code**
 - For mobile development: **Xcode** (iOS), **Android SDK** (Android)
 
-### ??? Setup Instructions
+### 🛠️ Setup Instructions
 
 1. **Clone the repository**
    ```bash
@@ -91,7 +91,7 @@ The project follows a clean, modular architecture with multiple specialized libr
    # Or use Visual Studio to run on your preferred platform
    ```
 
-### ?? How to Play
+### 🎯 How to Play
 
 1. **Launch the Whale.Maui application**
 2. **Enter the number of feeds** you want to race (default: 10)
@@ -99,7 +99,7 @@ The project follows a clean, modular architecture with multiple specialized libr
 4. **Watch the real-time race progress** as different plankton types compete
 5. **View the final leaderboard** showing race positions and plankton counts
 
-## ?? Technical Implementation
+## 🔧 Technical Implementation
 
 ### **Racing Algorithm**
 The game uses sophisticated concurrent programming:
@@ -121,25 +121,25 @@ The game uses sophisticated concurrent programming:
 - **User-friendly error messages**
 - **Logging** for debugging and monitoring
 
-## ?? Project Structure
+## 📁 Project Structure
 
 ```
 Plankton/
-??? ?? Whale.Maui/           # Cross-platform client app
-?   ??? ViewModels/          # MVVM view models
-?   ??? Services/            # API communication
-?   ??? Platforms/           # Platform-specific code
-?   ??? Resources/           # Images, fonts, assets
-??? ?? Plankton.API/         # Backend REST API
-?   ??? Services/            # Dependency injection
-?   ??? Middlewares/         # Request pipeline
-?   ??? Helpers/             # Validation utilities
-??? ?? Plankton.CryptoHelper/ # Encryption/decryption
-??? ?? Plankton.RaceHelper/   # Concurrent racing engine
-??? ?? Plankton.DTO/         # Shared data models
+├── 📱 Whale.Maui/           # Cross-platform client app
+│   ├── ViewModels/          # MVVM view models
+│   ├── Services/            # API communication
+│   ├── Platforms/           # Platform-specific code
+│   └── Resources/           # Images, fonts, assets
+├── 🌐 Plankton.API/         # Backend REST API
+│   ├── Services/            # Dependency injection
+│   ├── Middlewares/         # Request pipeline
+│   └── Helpers/             # Validation utilities
+├── 🔐 Plankton.CryptoHelper/ # Encryption/decryption
+├── 🏁 Plankton.RaceHelper/   # Concurrent racing engine
+└── 📦 Plankton.DTO/         # Shared data models
 ```
 
-## ?? API Endpoints
+## 🌐 API Endpoints
 
 ### `POST /race`
 **Races encrypted plankton feeds**
@@ -160,7 +160,7 @@ Plankton/
 }
 ```
 
-## ?? Technologies Used
+## 🧪 Technologies Used
 
 - **.NET 9** - Latest framework features
 - **MAUI** - Cross-platform UI framework
@@ -170,7 +170,7 @@ Plankton/
 - **Azure App Service** - Cloud hosting
 - **HttpClient** - HTTP communication
 
-## ?? Development Notes
+## 🚧 Development Notes
 
 ### **Performance Considerations**
 - **Efficient task scheduling** minimizes overhead
@@ -184,7 +184,7 @@ Plankton/
 - **Input validation** prevents injection attacks
 - **HTTPS-only** communication
 
-## ?? Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -192,11 +192,11 @@ Plankton/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## ?? License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ?? Acknowledgments
+## 🎉 Acknowledgments
 
 - **Microsoft** for .NET MAUI and ASP.NET Core
 - **CommunityToolkit** for MVVM helpers
@@ -205,4 +205,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-*Ready to feed the whale? Let the plankton races begin! ????*
+*Ready to feed the whale? Let the plankton races begin! 🐋🦠*
