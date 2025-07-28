@@ -1,25 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Plankton.CryptoHelper;
-using Plankton.DTO;
-using System.Net.Http.Json;
-using System.Text;
+﻿namespace Whale.Maui.Services;
 
-namespace Whale.Maui.Services;
-
-public class APIService
+public class APIService(IHttpClientFactory clientFactory) : IAPIService
 {
-    private HttpClient _client;
-    public APIService()
+    private readonly HttpClient _client = clientFactory.CreateClient("whale");
+
+    public async Task<FeedDTO> EncryptedFeedRace(FeedCryptedDTO feed)
     {
-        _client = new()
-        {
-            BaseAddress = new Uri("https://planktonapi.azurewebsites.net"),
-        };
-    }
-    public async Task<FeedDTO> EncryptedFeedRace(FeedDTO feed)
-    {
-        var encryptUser = cryptFeedDTO(feed);
-        var request = await _client.PostAsJsonAsync("/race", encryptUser);
+        var encryptFeed = CryptFeedDTO(feed);
+        var request = await _client.PostAsJsonAsync("/race", encryptFeed);
         if (request.IsSuccessStatusCode)
         {
             return await request.Content.ReadFromJsonAsync<FeedDTO>();
@@ -28,14 +16,14 @@ public class APIService
         throw new Exception($"{pb.Title} {pb.Detail}");
     }
 
-    private FeedDTO cryptFeedDTO(FeedDTO feed)
+    private static FeedCryptedDTO CryptFeedDTO(FeedCryptedDTO feedCrypted)
     {
         var key = Encoding.UTF8.GetBytes("E546C8DF278CD5931069B522E695D4F2");
 
-        return new FeedDTO
+        return new FeedCryptedDTO
         {
-            Kind = CipherEncrypt.EncryptCipher(feed.Kind, key),
-            Count = CipherEncrypt.EncryptCipher(feed.Count, key)
+            Kind = CipherEncrypt.EncryptCipher(feedCrypted.Kind, key),
+            Count = CipherEncrypt.EncryptCipher(feedCrypted.Count, key)
         };
     }
 }

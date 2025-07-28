@@ -1,13 +1,10 @@
-﻿using Whale.Maui.Services;
-using Whale.Maui.ViewModels;
-
-namespace Whale.Maui;
+﻿namespace Whale.Maui;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage(APIService api)
+    public MainPage(MainVM vm)
     {
         InitializeComponent();
-        BindingContext = new MainVM(api);
+        BindingContext = vm;
     }
 }

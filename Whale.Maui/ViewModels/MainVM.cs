@@ -1,37 +1,27 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Plankton.DTO;
-using Plankton.RaceHelper;
-using Whale.Maui.Services;
+﻿namespace Whale.Maui.ViewModels;
 
-namespace Whale.Maui.ViewModels;
-
-public partial class MainVM : ObservableObject
+public partial class MainVM(IAPIService api) : ObservableObject
 {
     [ObservableProperty]
     private string _status = "Ready ?";
-    private readonly APIService _api;
+    private readonly IAPIService _api = api;
     [RelayCommand]
-    private async Task onUpdateStatus()
+    private async Task OnUpdateStatusAsync()
     {
         var result = await TaskGoup.RunScopeAsync(default, async group =>
         {
             return await TaskGoup.RaceScopeAsync<FeedDTO>(group.CancellationToken, group =>
             {
-                Parallel.For(1, 500, (index) =>
+                Parallel.For(1, 10, (index) =>
                 {
-                    group.Race(async token => await _api.EncryptedFeedRace(new FeedDTO { Kind = "Little", Count = index.ToString() }));
-                    group.Race(async token => await _api.EncryptedFeedRace(new FeedDTO { Kind = "Big", Count = index.ToString() }));
-                    group.Race(async token => await _api.EncryptedFeedRace(new FeedDTO { Kind = "Average", Count = index.ToString() }));
+                    group.Race(async token => await _api.EncryptedFeedRace(new FeedCryptedDTO { Kind = "Little", Count = $"{index}" }));
+                    group.Race(async token => await _api.EncryptedFeedRace(new FeedCryptedDTO { Kind = "Big", Count = $"{index}" }));
+                    group.Race(async token => await _api.EncryptedFeedRace(new FeedCryptedDTO { Kind = "Average", Count = $"{index}" }));
                 });
             });
         });
         Status = $"You fed me by {result.Kind} with {result.Count} plankton";
 
         SemanticScreenReader.Announce(Status);
-    }
-    public MainVM(APIService api)
-    {
-        _api = api;
     }
 }

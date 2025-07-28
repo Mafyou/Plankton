@@ -1,8 +1,4 @@
-﻿using CommunityToolkit.Maui;
-using Microsoft.Extensions.Logging;
-using Whale.Maui.Services;
-
-namespace Whale.Maui;
+﻿namespace Whale.Maui;
 
 public static class MauiProgram
 {
@@ -17,8 +13,12 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
-        builder.Services.AddSingleton<APIService>();
-        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddHttpClient("whale", client =>
+        {
+            client.BaseAddress = new Uri("https://planktonapi.azurewebsites.net");
+        });
+        builder.Services.AddSingleton<IAPIService, APIService>();
+        builder.Services.AddTransientWithShellRoute<MainPage, MainVM>(nameof(MainPage));
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

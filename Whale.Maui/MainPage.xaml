@@ -32,7 +32,7 @@
 
             <Button
                 Text="{Binding Status, Mode=TwoWay}"
-                Command="{Binding onUpdateStatusCommand, Mode=TwoWay}"
+                Command="{Binding UpdateStatusCommand, Mode=TwoWay}"
                 SemanticProperties.Hint="Enable the race to feed our Whale"
                 HorizontalOptions="Center" />
 
