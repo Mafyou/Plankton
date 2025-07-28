@@ -16,24 +16,7 @@ public class ValidatingPlanklon
         {
             return false;
         }
-        // Check if the Feed properties contains only alphanumeric characters
-        if (!CheckValidCaracters(plankton.Value.Kind) || !CheckValidCaracters(plankton.Value.Count))
-        {
-            return false;
-        }
         // If all checks passed, the plankton is valid to feed the whale
-        return true;
-    }
-
-    private static bool CheckValidCaracters(string field)
-    {
-        foreach (char c in field)
-        {
-            if (!char.IsLetter(c))
-            {
-                return false;
-            }
-        }
         return true;
     }
 }

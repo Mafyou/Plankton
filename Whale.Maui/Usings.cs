@@ -9,5 +9,6 @@ global using Plankton.RaceHelper;
 global using System.Net.Http.Json;
 global using System.Text;
 global using Whale.Maui.Abstractions;
+global using Whale.Maui.DisplayObjects;
 global using Whale.Maui.Services;
 global using Whale.Maui.ViewModels;

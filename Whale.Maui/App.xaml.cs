@@ -2,15 +2,16 @@
 
 public partial class App : Application
 {
-    public App()
+    private readonly IAPIService _apiService;
+
+    public App(IAPIService apiService)
     {
         InitializeComponent();
+        _apiService = apiService;
     }
 
-    protected override Window CreateWindow(IActivationState activationState)
+    protected override Window CreateWindow(IActivationState? activationState)
     {
-        var window = base.CreateWindow(activationState);
-        window.Page = new AppShell();
-        return window;
+        return new Window(new MainPage(new MainVM(_apiService)));
     }
 }
