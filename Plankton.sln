@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33606.364
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plankton.API", "Plankton.API\Plankton.API.csproj", "{AF41F853-C839-411C-8941-B21229671E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plankton.API", "src\Back\Plankton.API\Plankton.API.csproj", "{AF41F853-C839-411C-8941-B21229671E89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whale.Maui", "Whale.Maui\Whale.Maui.csproj", "{BA506113-B1B3-4926-8545-FE145CBF2198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whale.Maui", "src\Front\Whale.Maui\Whale.Maui.csproj", "{BA506113-B1B3-4926-8545-FE145CBF2198}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.DTO", "Plankton.DTO\Plankton.DTO.csproj", "{61BC57AD-4642-455B-AD96-78CF65F506AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.DTO", "src\Kernel\Plankton.DTO\Plankton.DTO.csproj", "{61BC57AD-4642-455B-AD96-78CF65F506AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.RaceHelper", "Plankton.RaceHelper\Plankton.RaceHelper.csproj", "{29876742-2C97-4A40-A254-A77507E09929}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.RaceHelper", "src\Kernel\Plankton.RaceHelper\Plankton.RaceHelper.csproj", "{29876742-2C97-4A40-A254-A77507E09929}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.CryptoHelper", "Plankton.CryptoHelper\Plankton.CryptoHelper.csproj", "{3B5B142D-65E7-4EDE-9DED-BBB81E44C794}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plankton.CryptoHelper", "src\Kernel\Plankton.CryptoHelper\Plankton.CryptoHelper.csproj", "{3B5B142D-65E7-4EDE-9DED-BBB81E44C794}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

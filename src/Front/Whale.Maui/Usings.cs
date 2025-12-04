@@ -1,0 +1,15 @@
+﻿global using CommunityToolkit.Maui;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microsoft.Extensions.Logging;
+global using Plankton.CryptoHelper;
+global using Plankton.DTO;
+global using Plankton.RaceHelper;
+global using System.Collections.ObjectModel;
+global using System.Net.Http.Json;
+global using System.Text;
+global using Whale.Maui.Abstractions;
+global using Whale.Maui.DisplayObjects;
+global using Whale.Maui.Models;
+global using Whale.Maui.Services;
+global using Whale.Maui.ViewModels;

@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="src/Back/Plankton.API/Plankton.API.csproj" />
+  <Project Path="src/Kernel/Plankton.CryptoHelper/Plankton.CryptoHelper.csproj" />
+  <Project Path="src/Kernel/Plankton.DTO/Plankton.DTO.csproj" />
+  <Project Path="src/Kernel/Plankton.RaceHelper/Plankton.RaceHelper.csproj" />
+  <Project Path="src/Front/Whale.Maui/Whale.Maui.csproj">
+    <Deploy />
+  </Project>
+</Solution>
