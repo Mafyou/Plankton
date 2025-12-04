@@ -3,68 +3,317 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Whale.Maui.ViewModels"
              xmlns:obj="clr-namespace:Whale.Maui.DisplayObjects"
+             xmlns:converters="clr-namespace:Whale.Maui.Converters"
              x:DataType="vm:MainVM"
-             x:Class="Whale.Maui.MainPage">
+             x:Class="Whale.Maui.MainPage"
+             BackgroundColor="{StaticResource OceanDeep}">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Converters -->
+            <converters:PositionToColorConverter x:Key="PositionToColorConverter" />
+            <converters:PlanktonToEmojiConverter x:Key="PlanktonToEmojiConverter" />
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Imagine a whale who is hungry!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <!-- Card Style -->
+            <Style x:Key="CardBorder" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+                <Setter Property="Stroke" Value="Transparent" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="20,10" />
+                <Setter Property="Shadow">
+                    <Shadow Brush="{StaticResource Black}"
+                            Offset="0,2"
+                            Radius="8"
+                            Opacity="0.1" />
+                </Setter>
+            </Style>
 
-            <Label
-                Text="Feed me!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            <!-- Header Label Style -->
+            <Style x:Key="HeaderLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
 
-            <Label
-                Text="Welcome to Plankton Game!"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to Plankton Game!"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <!-- Subtitle Label Style -->
+            <Style x:Key="SubtitleLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource OceanFoam}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
 
-            <Label
-                Text="Number of feeds:"
-                FontSize="16"
-                HorizontalOptions="Center" />
+            <!-- Input Label Style -->
+            <Style x:Key="InputLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource OceanDeep}" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+            </Style>
 
-            <Entry
-                Text="{Binding NumberOfFeeds}"
-                Keyboard="Numeric"
-                Placeholder="Enter number of feeds"
-                HorizontalOptions="Center"
-                WidthRequest="200" />
+            <!-- Primary Button Style -->
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource CoralOrange}" />
+                <Setter Property="TextColor" Value="{StaticResource White}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Margin" Value="0,10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-            <Button
-                Text="{Binding Status, Mode=TwoWay}"
-                Command="{Binding UpdateStatusCommand, Mode=TwoWay}"
-                SemanticProperties.Hint="Enable the race to feed our Whale"
-                HorizontalOptions="Center" />
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header Section -->
+        <VerticalStackLayout Grid.Row="0" Padding="20,40,20,20" Spacing="15">
+            <!-- Whale Image with Animation -->
+            <Border StrokeShape="RoundRectangle 100"
+                    WidthRequest="160"
+                    HeightRequest="160"
+                    BackgroundColor="{StaticResource White}"
+                    Stroke="Transparent"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,10">
+                <Image Source="dotnet_bot.png"
+                       SemanticProperties.Description="Imagine a whale who is hungry!"
+                       Aspect="AspectFit"
+                       Margin="15" />
+            </Border>
 
-            <CollectionView ItemsSource="{Binding FeedResults}" 
-                      IsVisible="{Binding HasResults}"
-                      HeightRequest="300"
-                      HorizontalOptions="Fill">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="obj:FeedResultItem">
-                        <Grid Padding="10" ColumnDefinitions="Auto,*,Auto">
-                            <Label Grid.Column="0" Text="{Binding Position, StringFormat='#{0}'}" FontAttributes="Bold" />
-                            <Label Grid.Column="1" Text="{Binding Kind}" HorizontalOptions="Center" />
-                            <Label Grid.Column="2" Text="{Binding Count, StringFormat='{0} plankton'}" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <!-- Title -->
+            <Label Text="🐋 Feed the Whale!"
+                   Style="{StaticResource HeaderLabel}"
+                   SemanticProperties.HeadingLevel="Level1" />
 
+            <!-- Subtitle -->
+            <Label Text="Send encrypted planktons into an epic race!"
+                   Style="{StaticResource SubtitleLabel}"
+                   SemanticProperties.HeadingLevel="Level2" />
         </VerticalStackLayout>
-    </ScrollView>
+
+        <!-- Main Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15" Padding="0,0,0,30">
+                
+                <!-- API Configuration Card -->
+                <Border Style="{StaticResource CardBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="🌐 API Endpoint"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource OceanDeep}"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,10" />
+
+                        <Label Text="Race server address:"
+                               Style="{StaticResource InputLabel}" />
+
+                        <Border StrokeShape="RoundRectangle 15"
+                                Stroke="{StaticResource OceanLight}"
+                                StrokeThickness="2"
+                                BackgroundColor="{StaticResource OceanFoam}">
+                            <Entry Text="{Binding BaseAddress}"
+                                   Placeholder="https://planktonapi.azurewebsites.net"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Center"
+                                   FontSize="14"
+                                   TextColor="{StaticResource OceanDeep}"
+                                   PlaceholderColor="{StaticResource Gray400}"
+                                   Margin="15,5" />
+                        </Border>
+
+                        <Button Text="Use Default"
+                                Command="{Binding SetDefaultBaseAddressCommand}"
+                                BackgroundColor="{StaticResource PlanktonGreen}"
+                                TextColor="{StaticResource White}"
+                                CornerRadius="12"
+                                FontSize="14"
+                                HeightRequest="40" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Configuration Card -->
+                <Border Style="{StaticResource CardBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="🎯 Race Configuration"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource OceanDeep}"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,10" />
+
+                        <Label Text="How many planktons to race?"
+                               Style="{StaticResource InputLabel}" />
+
+                        <Border StrokeShape="RoundRectangle 15"
+                                Stroke="{StaticResource OceanLight}"
+                                StrokeThickness="2"
+                                BackgroundColor="{StaticResource OceanFoam}">
+                            <Entry Text="{Binding NumberOfFeeds}"
+                                   Keyboard="Numeric"
+                                   Placeholder="Enter number (e.g., 10, 50, 100)"
+                                   HorizontalOptions="Fill"
+                                   VerticalOptions="Center"
+                                   FontSize="18"
+                                   TextColor="{StaticResource OceanDeep}"
+                                   PlaceholderColor="{StaticResource Gray400}"
+                                   Margin="15,5" />
+                        </Border>
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,10,0,0">
+                            <Button Grid.Column="0"
+                                    Text="5"
+                                    Command="{Binding SetFeedsCommand}"
+                                    CommandParameter="5"
+                                    BackgroundColor="{StaticResource PlanktonGreen}"
+                                    TextColor="{StaticResource White}"
+                                    CornerRadius="12"
+                                    FontSize="14" />
+                            <Button Grid.Column="1"
+                                    Text="10"
+                                    Command="{Binding SetFeedsCommand}"
+                                    CommandParameter="10"
+                                    BackgroundColor="{StaticResource PlanktonGreen}"
+                                    TextColor="{StaticResource White}"
+                                    CornerRadius="12"
+                                    FontSize="14" />
+                            <Button Grid.Column="2"
+                                    Text="50"
+                                    Command="{Binding SetFeedsCommand}"
+                                    CommandParameter="50"
+                                    BackgroundColor="{StaticResource PlanktonGreen}"
+                                    TextColor="{StaticResource White}"
+                                    CornerRadius="12"
+                                    FontSize="14" />
+                        </Grid>
+
+                        <Button Text="{Binding Status}"
+                                Command="{Binding UpdateStatusCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                SemanticProperties.Hint="Start the race to feed the whale"
+                                Margin="0,15,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Results Card -->
+                <Border Style="{StaticResource CardBorder}"
+                        IsVisible="{Binding HasResults}">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="🏆 Race Leaderboard"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource OceanDeep}"
+                               HorizontalOptions="Center" />
+
+                        <BoxView HeightRequest="2"
+                                 BackgroundColor="{StaticResource OceanLight}"
+                                 HorizontalOptions="Fill"
+                                 Margin="0,0,0,5" />
+
+                        <CollectionView ItemsSource="{Binding FeedResults}"
+                                        SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="obj:FeedResultItem">
+                                    <Border StrokeShape="RoundRectangle 12"
+                                            Stroke="{StaticResource OceanLight}"
+                                            StrokeThickness="2"
+                                            BackgroundColor="{StaticResource OceanFoam}"
+                                            Margin="0,5"
+                                            Padding="15,12">
+                                        <Grid ColumnDefinitions="50,*,Auto" ColumnSpacing="15">
+                                            <!-- Position Badge -->
+                                            <Border Grid.Column="0"
+                                                    StrokeShape="RoundRectangle 25"
+                                                    Stroke="Transparent"
+                                                    WidthRequest="45"
+                                                    HeightRequest="45"
+                                                    HorizontalOptions="Center"
+                                                    VerticalOptions="Center">
+                                                <Border.BackgroundColor>
+                                                    <MultiBinding Converter="{StaticResource PositionToColorConverter}">
+                                                        <Binding Path="Position" />
+                                                    </MultiBinding>
+                                                </Border.BackgroundColor>
+                                                <Label Text="{Binding Position, StringFormat='#{0}'}"
+                                                       FontSize="16"
+                                                       FontAttributes="Bold"
+                                                       TextColor="{StaticResource White}"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center" />
+                                            </Border>
+
+                                            <!-- Plankton Type with Icon -->
+                                            <VerticalStackLayout Grid.Column="1"
+                                                                 VerticalOptions="Center"
+                                                                 Spacing="2">
+                                                <Label FontSize="16"
+                                                       FontAttributes="Bold"
+                                                       TextColor="{StaticResource OceanDeep}">
+                                                    <Label.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="Kind" Converter="{StaticResource PlanktonToEmojiConverter}" />
+                                                            <Binding Path="Kind" />
+                                                        </MultiBinding>
+                                                    </Label.Text>
+                                                </Label>
+                                                <Label Text="Plankton"
+                                                       FontSize="12"
+                                                       TextColor="{StaticResource Gray500}" />
+                                            </VerticalStackLayout>
+
+                                            <!-- Count Badge -->
+                                            <Border Grid.Column="2"
+                                                    StrokeShape="RoundRectangle 20"
+                                                    BackgroundColor="{StaticResource WhaleBlue}"
+                                                    Stroke="Transparent"
+                                                    Padding="12,6"
+                                                    VerticalOptions="Center">
+                                                <Label Text="{Binding Count, StringFormat='{0} 🦠'}"
+                                                       FontSize="14"
+                                                       FontAttributes="Bold"
+                                                       TextColor="{StaticResource White}" />
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Info Card -->
+                <Border Style="{StaticResource CardBorder}"
+                        BackgroundColor="{StaticResource OceanFoam}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="💡 How It Works"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource OceanDeep}"
+                               HorizontalOptions="Center" />
+                        <Label FontSize="13"
+                               TextColor="{StaticResource Gray600}"
+                               HorizontalTextAlignment="Center"
+                               LineHeight="1.3">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Each plankton type (" />
+                                    <Span Text="Little 🔵" FontAttributes="Bold" />
+                                    <Span Text=", " />
+                                    <Span Text="Big 🟢" FontAttributes="Bold" />
+                                    <Span Text=", " />
+                                    <Span Text="Average 🟡" FontAttributes="Bold" />
+                                    <Span Text=") races simultaneously using encrypted API calls. The fastest responses win! ⚡" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </VerticalStackLayout>
+                </Border>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 
 </ContentPage>

@@ -4,6 +4,17 @@ public class APIService(IHttpClientFactory clientFactory) : IAPIService
 {
     private readonly HttpClient _client = clientFactory.CreateClient("whale");
 
+    public void UpdateBaseAddress(string baseAddress)
+    {
+        if (!string.IsNullOrWhiteSpace(baseAddress))
+        {
+            if (Uri.TryCreate(baseAddress, UriKind.Absolute, out var uri))
+            {
+                _client.BaseAddress = uri;
+            }
+        }
+    }
+
     public async Task<FeedDTO> EncryptedFeedRace(FeedCryptedDTO feed)
     {
         var encryptFeed = CryptFeedDTO(feed);

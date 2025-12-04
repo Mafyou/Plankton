@@ -8,6 +8,19 @@ public partial class MainVM(IAPIService api) : ObservableObject
     [ObservableProperty]
     private string _numberOfFeeds = "10";
 
+    public string BaseAddress
+    {
+        get
+        {
+            return Preferences.Get("BaseAdress", "https://planktonapi.azurewebsites.net");
+        }
+        set
+        {
+            Preferences.Set("BaseAdress", value);
+            OnPropertyChanged();
+        }
+    }
+
     [ObservableProperty]
     private bool _hasResults = false;
 
@@ -17,17 +30,37 @@ public partial class MainVM(IAPIService api) : ObservableObject
     private readonly IAPIService _api = api;
 
     [RelayCommand]
+    private void SetFeeds(string count)
+    {
+        NumberOfFeeds = count;
+    }
+
+    [RelayCommand]
+    private void SetDefaultBaseAddress()
+    {
+        BaseAddress = "https://planktonapi.azurewebsites.net";
+    }
+
+    [RelayCommand]
     private async Task OnUpdateStatusAsync()
     {
         if (!int.TryParse(NumberOfFeeds, out int feedCount) || feedCount <= 0)
         {
-            Status = "Please enter a valid number of feeds";
+            Status = "⚠️ Please enter a valid number";
+            await Task.Delay(2000);
+            Status = "Ready ?";
             return;
+        }
+
+        // Update API base address if changed
+        if (!string.IsNullOrWhiteSpace(BaseAddress))
+        {
+            _api.UpdateBaseAddress(BaseAddress);
         }
 
         FeedResults.Clear();
         HasResults = false;
-        Status = $"Racing {feedCount} feeds...";
+        Status = $"🏁 Racing {feedCount} feeds...";
 
         var results = await TaskGoup.RunScopeAsync(default, async group =>
         {
@@ -74,7 +107,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
 
         HasResults = FeedResults.Count > 0;
         var winner = results.FirstOrDefault();
-        Status = $"Winner: {winner.Kind} with {winner.Count} plankton!";
+        Status = winner != null ? $"🏆 Winner: {winner.Kind}!" : "Ready ?";
 
         SemanticScreenReader.Announce(Status);
     }

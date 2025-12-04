@@ -14,9 +14,10 @@
     </Style>
 
     <Style TargetType="Border">
-        <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
-        <Setter Property="StrokeShape" Value="Rectangle"/>
-        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Stroke" Value="Transparent" />
+        <Setter Property="StrokeShape" Value="RoundRectangle 8"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
 
     <Style TargetType="BoxView">
@@ -128,12 +129,6 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
-    </Style>
-
-    <Style TargetType="Frame">
-        <Setter Property="HasShadow" Value="False" />
-        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
-        <Setter Property="CornerRadius" Value="8" />
     </Style>
 
     <Style TargetType="ImageButton">

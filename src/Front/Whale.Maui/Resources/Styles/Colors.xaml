@@ -41,4 +41,22 @@
     <Color x:Key="Blue200Accent">#72ACF1</Color>
     <Color x:Key="Blue300Accent">#A7CBF6</Color>
 
+    <!-- Ocean Theme Colors -->
+    <Color x:Key="OceanDeep">#0A2463</Color>
+    <Color x:Key="OceanMid">#1E5F8C</Color>
+    <Color x:Key="OceanLight">#3E92CC</Color>
+    <Color x:Key="OceanFoam">#D8F3DC</Color>
+    <Color x:Key="PlanktonGreen">#52B788</Color>
+    <Color x:Key="WhaleBlue">#2B7A9B</Color>
+    <Color x:Key="CoralOrange">#FB8500</Color>
+    <Color x:Key="GoldMedal">#FFD700</Color>
+    <Color x:Key="SilverMedal">#C0C0C0</Color>
+    <Color x:Key="BronzeMedal">#CD7F32</Color>
+    
+    <SolidColorBrush x:Key="OceanDeepBrush" Color="{StaticResource OceanDeep}"/>
+    <SolidColorBrush x:Key="OceanLightBrush" Color="{StaticResource OceanLight}"/>
+    <SolidColorBrush x:Key="OceanFoamBrush" Color="{StaticResource OceanFoam}"/>
+    <SolidColorBrush x:Key="PlanktonGreenBrush" Color="{StaticResource PlanktonGreen}"/>
+    <SolidColorBrush x:Key="CoralOrangeBrush" Color="{StaticResource CoralOrange}"/>
+
 </ResourceDictionary>
