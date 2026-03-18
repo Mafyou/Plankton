@@ -66,38 +66,38 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto,*">
-        <!-- Header Section -->
-        <VerticalStackLayout Grid.Row="0" Padding="20,40,20,20" Spacing="15">
-            <!-- Whale Image with Animation -->
-            <Border StrokeShape="RoundRectangle 100"
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Header Section -->
+            <VerticalStackLayout Grid.Row="0" Padding="20,40,20,20" Spacing="15">
+                <!-- Whale Image with Animation -->
+                <Border StrokeShape="RoundRectangle 100"
                     WidthRequest="160"
                     HeightRequest="160"
                     BackgroundColor="{StaticResource White}"
                     Stroke="Transparent"
                     HorizontalOptions="Center"
                     Margin="0,0,0,10">
-                <Image Source="dotnet_bot.png"
+                    <Image Source="dotnet_bot.png"
                        SemanticProperties.Description="Imagine a whale who is hungry!"
                        Aspect="AspectFit"
                        Margin="15" />
-            </Border>
+                </Border>
 
-            <!-- Title -->
-            <Label Text="🐋 Feed the Whale!"
+                <!-- Title -->
+                <Label Text="🐋 Feed the Whale!"
                    Style="{StaticResource HeaderLabel}"
                    SemanticProperties.HeadingLevel="Level1" />
 
-            <!-- Subtitle -->
-            <Label Text="Send encrypted planktons into an epic race!"
+                <!-- Subtitle -->
+                <Label Text="Send encrypted planktons into an epic race!"
                    Style="{StaticResource SubtitleLabel}"
                    SemanticProperties.HeadingLevel="Level2" />
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
-        <!-- Main Content -->
-        <ScrollView Grid.Row="1">
+            <!-- Main Content -->
             <VerticalStackLayout Spacing="15" Padding="0,0,0,30">
-                
+
                 <!-- API Configuration Card -->
                 <Border Style="{StaticResource CardBorder}">
                     <VerticalStackLayout Spacing="10">
@@ -313,7 +313,6 @@
                 </Border>
 
             </VerticalStackLayout>
-        </ScrollView>
-    </Grid>
-
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

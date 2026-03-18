@@ -2,7 +2,8 @@
 
 public class APIService(IHttpClientFactory clientFactory) : IAPIService
 {
-    private readonly HttpClient _client = clientFactory.CreateClient("whale");
+    private readonly IHttpClientFactory _clientFactory = clientFactory;
+    private HttpClient _client = clientFactory.CreateClient("whale");
 
     public void UpdateBaseAddress(string baseAddress)
     {
@@ -10,6 +11,7 @@ public class APIService(IHttpClientFactory clientFactory) : IAPIService
         {
             if (Uri.TryCreate(baseAddress, UriKind.Absolute, out var uri))
             {
+                _client = _clientFactory.CreateClient("whale");
                 _client.BaseAddress = uri;
             }
         }

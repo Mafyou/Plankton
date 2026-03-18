@@ -47,7 +47,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
         if (!int.TryParse(NumberOfFeeds, out int feedCount) || feedCount <= 0)
         {
             Status = "⚠️ Please enter a valid number";
-            await Task.Delay(2000);
+            await Task.Delay(TimeSpan.FromSeconds(2));
             Status = "Ready ?";
             return;
         }
@@ -60,7 +60,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
 
         FeedResults.Clear();
         HasResults = false;
-        Status = $"🏁 Racing {feedCount} feeds...";
+        Status = $"🏁 Racing {feedCount * 3} planktons...";
 
         var results = await TaskGoup.RunScopeAsync(default, async group =>
         {
