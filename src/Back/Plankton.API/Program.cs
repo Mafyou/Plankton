@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddPlanktonServices();
+builder.Services.AddPlanktonServices(builder.Configuration);
 
 var app = builder.Build();
 
