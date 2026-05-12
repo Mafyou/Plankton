@@ -5,7 +5,5 @@
 services:
   - type: web
     name: plankton
-    env: dotnet
-    rootDir: src/Back/Plankton.API
-    buildCommand: dotnet publish -c Release -o out
-    startCommand: dotnet out/Plankton.API.dll
+    env: docker
+    dockerfilePath: ./Dockerfile

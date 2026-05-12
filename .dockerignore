@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+
+# Build output
+**/bin/
+**/obj/
+
+# IDE/editor
+.vs/
+.vscode/
+*.user
+
+# OS/files
+.DS_Store
+Thumbs.db
+
+# Docs/infra not required in image context
+README.md
+LICENSE
+Plankton.sln
+Plankton.slnx
