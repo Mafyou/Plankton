@@ -12,7 +12,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
     {
         get
         {
-            return Preferences.Get("BaseAdress", "https://planktonapi.azurewebsites.net");
+            return Preferences.Get("BaseAdress", "https://plankton-376v.onrender.com");
         }
         set
         {
@@ -38,7 +38,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
     [RelayCommand]
     private void SetDefaultBaseAddress()
     {
-        BaseAddress = "https://planktonapi.azurewebsites.net";
+        BaseAddress = "https://plankton-376v.onrender.com";
     }
 
     [RelayCommand]

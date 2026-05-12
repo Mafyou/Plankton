@@ -15,7 +15,7 @@ public static class MauiProgram
             });
         builder.Services.AddHttpClient("whale", client =>
         {
-            client.BaseAddress = new Uri("https://planktonapi.azurewebsites.net");
+            client.BaseAddress = new Uri("https://plankton-376v.onrender.com");
         });
         builder.Services.AddSingleton<IAPIService, APIService>();
         builder.Services.AddTransientWithShellRoute<MainPage, MainVM>(nameof(MainPage));

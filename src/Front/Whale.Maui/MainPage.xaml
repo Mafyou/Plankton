@@ -116,7 +116,7 @@
                                 StrokeThickness="2"
                                 BackgroundColor="{StaticResource OceanFoam}">
                             <Entry Text="{Binding BaseAddress}"
-                                   Placeholder="https://planktonapi.azurewebsites.net"
+                                   Placeholder="https://plankton-376v.onrender.com"
                                    HorizontalOptions="Fill"
                                    VerticalOptions="Center"
                                    FontSize="14"
