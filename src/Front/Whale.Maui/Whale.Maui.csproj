@@ -11,7 +11,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Whale.Maui</ApplicationTitle>
+		<ApplicationTitle>Plankton</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>fr.mafyou.whale</ApplicationId>

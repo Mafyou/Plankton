@@ -60,7 +60,7 @@ public partial class MainVM(IAPIService api) : ObservableObject
 
         FeedResults.Clear();
         HasResults = false;
-        Status = $"🏁 Racing {feedCount * 3} planktons...";
+        Status = $"🏁 Racing {feedCount * 3} Planktons...";
 
         var results = await TaskGoup.RunScopeAsync(default, async group =>
         {
