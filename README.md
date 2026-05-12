@@ -18,7 +18,7 @@ Built with .NET 10, this game demonstrates advanced asynchronous programming, co
 │  STEP 1: CONFIGURE YOUR API ENDPOINT                            │
 │  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━                           │
 │  🌐 Set the race server address (where races happen)            │
-│  Default: https://planktonapi.azurewebsites.net                 │
+│  Default: https://plankton-376v.onrender.com                 │
 │  💡 Use the "Use Default" button for quick reset               │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
@@ -357,7 +357,7 @@ The Plankton Game UI embraces an **ocean theme** to create an immersive underwat
 A: The app uses Unicode escape sequences for cross-platform emoji support. Ensure your device supports Unicode 13.0+ characters.
 
 **Q: Can't connect to API?**  
-A: Verify the endpoint URL is correct. The default `https://planktonapi.azurewebsites.net` should work. If using a custom endpoint, ensure it's accessible and includes `https://`.
+A: Verify the endpoint URL is correct. The default `https://plankton-376v.onrender.com` should work. If using a custom endpoint, ensure it's accessible and includes `https://`.
 
 **Q: Race results are inconsistent?**  
 A: This is expected! The game demonstrates real race conditions where API response times vary. Different runs produce different winners.
